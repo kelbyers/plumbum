@@ -1,5 +1,8 @@
 sudo: required
 language: python
+branches:
+  except:
+    - paramiko_file
 matrix:
   include:
     - python: 2.6

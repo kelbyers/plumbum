@@ -84,5 +84,8 @@ setup(name = "plumbum",
         "Topic :: Software Development :: Build Tools",
         "Topic :: System :: Systems Administration",
     ],
+    install_requires = [
+        'pypiwin32; platform_system == "Windows"',
+    ]
 )
 

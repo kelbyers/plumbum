@@ -21,3 +21,5 @@ tests/.cache/*
 *.pot
 /*venv*
 *.mypy_cache
+/tmp/
+.tox
