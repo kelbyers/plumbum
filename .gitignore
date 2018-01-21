@@ -23,3 +23,5 @@ tests/.cache/*
 *.mypy_cache
 /tmp/
 .tox
+.python-version
+.vagrant
