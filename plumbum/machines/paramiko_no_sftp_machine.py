@@ -1,5 +1,7 @@
 from plumbum.machines import BaseRemoteMachine
+from plumbum.machines.session import SessionPopen
 from plumbum.machines.paramiko_machine import ParamikoMachine
+
 
 
 class ParamikoNoSftpMachine(ParamikoMachine):
@@ -19,4 +21,13 @@ class ParamikoNoSftpMachine(ParamikoMachine):
         BaseRemoteMachine._path_write(self, fn, data)
 
     def _upload(self, src, dst):
-        BaseRemoteMachine.upload(self, src, dst)
+        if src.is_dir():
+            if not dst.exists():
+                self._path_mkdir(str(dst))
+            for fn in src:
+                self._upload(fn, dst / fn.name)
+        elif dst.is_dir():
+            self._upload(str(src), str(dst / src.name))
+        else:
+            with open(str(src)) as fl:
+                pass
