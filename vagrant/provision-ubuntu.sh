@@ -65,6 +65,7 @@ chmod +x ~/setup
 
 [[ -f ~/runtests.sh ]] || cat <<'EOF' > ~/runtests.sh
 ENVLIST="${ENVLIST-$(pyenv versions --bare)}"
+find tests -name '__pycache__' | xargs rm -rf
 for ENV in $ENVLIST; do
     ~/${ENV}/bin/py.test -n 5 -x || {
         echo failed in $ENV
