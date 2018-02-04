@@ -56,8 +56,8 @@ done
 for ENV in $(pyenv versions --bare); do
     [[ -d ~/${ENV} ]] || {
         virtualenv ~/${ENV}
-        ~/${ENV}/bin/pip install -r /vagrant/dev-requirements.txt -r /vagrant/dev-requirements-extra.txt
-        ~/${ENV}/bin/pip install -e /vagrant/
+        ~/${ENV}/bin/pip install -r /vagrant/plumbum/dev-requirements.txt -r /vagrant/plumbum/dev-requirements-extra.txt
+        ~/${ENV}/bin/pip install -e /vagrant/plumbum
     }
 done
 EOF
