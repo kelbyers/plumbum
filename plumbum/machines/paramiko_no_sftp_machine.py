@@ -1,7 +1,5 @@
 from plumbum.machines import BaseRemoteMachine
-from plumbum.machines.session import SessionPopen
 from plumbum.machines.paramiko_machine import ParamikoMachine
-
 
 
 class ParamikoNoSftpMachine(ParamikoMachine):
@@ -27,7 +25,9 @@ class ParamikoNoSftpMachine(ParamikoMachine):
             for fn in src:
                 self._upload(fn, dst / fn.name)
         elif dst.is_dir():
-            self._upload(str(src), str(dst / src.name))
+            self._upload(src, dst / src.name)
         else:
             with open(str(src)) as fl:
-                pass
+                dd = self['dd']
+                proc = self.popen(dd['of=%s' % dst.name], cwd=dst.dirname)
+                proc.communicate()
